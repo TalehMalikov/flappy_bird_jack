@@ -2,7 +2,6 @@ class Bird{
     field int x, y; // screen location of the bird
     field int velocity; // vertical velocity of the bird
 
-    /** Constructs and draws a new bird with a given location and size. */
     constructor Bird new(int ax, int ay) {
        let x = ax;
        let y = ay;
