@@ -37,7 +37,7 @@ class Game{
     method void run() {
         var char key;
 
-        while (!checkGameOver()) {
+        while (~checkGameOver()) {
             let key = Keyboard.keyPressed();
 
             if (key = 32) {  // 32 is the spacebar character

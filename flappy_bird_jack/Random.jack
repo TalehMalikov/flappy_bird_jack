@@ -7,7 +7,7 @@ class Random {
     }
 
     function int rand() {
-        let seed = (seed * 214013) + 2531011;
+        let seed = (seed * 31) + 57;
         if (seed < 0) { let seed = -seed; }
         return seed;
     }
