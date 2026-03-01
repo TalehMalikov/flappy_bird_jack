@@ -1,6 +1,5 @@
 class Pipe{
     field int x;
-    
     field int gapTop;
     field int gapSize;
     
@@ -12,42 +11,46 @@ class Pipe{
     }
 
     method void move() {
-        let x = x - 2; // move left
+        let x = x - 3;
         return;
     }
 
-    method boolean  isOffScreen() {
-        if (x < 0) {
+    method boolean isOffScreen() {
+        if (x < 16) {
             return true;
         }
         return false;
     }
-    
+
     method void draw() {
+        if (x < 0) { return; }
+        if ((x + 32) > 511) { return; }
         do Screen.setColor(true);
         if (gapTop > 0) {
-            do Screen.drawRectangle(x, 0, x+16, gapTop);
+            do Screen.drawRectangle(x, 0, x+32, gapTop);
         }
-        if ((gapTop + gapSize) < 256) {
-            do Screen.drawRectangle(x, gapTop+gapSize, x+16, 255);
+        if ((gapTop + gapSize) < 255) {
+            do Screen.drawRectangle(x, gapTop+gapSize, x+32, 255);
         }
         return;
     }
 
     method void erase() {
+        if (x < 0) { return; }
+        if ((x + 32) > 511) { return; }
         do Screen.setColor(false);
         if (gapTop > 0) {
-            do Screen.drawRectangle(x, 0, x+16, gapTop);
+            do Screen.drawRectangle(x, 0, x+32, gapTop);
         }
-        if ((gapTop + gapSize) < 256) {
-            do Screen.drawRectangle(x, gapTop+gapSize, x+16, 255);
+        if ((gapTop + gapSize) < 255) {
+            do Screen.drawRectangle(x, gapTop+gapSize, x+32, 255);
         }
         return;
     }
 
     method void dispose() {
-      do Memory.deAlloc(this);
-      return;
+        do Memory.deAlloc(this);
+        return;
     }
 
     method boolean collidesWith(Bird bird) {
@@ -56,8 +59,8 @@ class Pipe{
         let birdX = bird.getX();
         let birdY = bird.getY();
         
-        if ((birdX + 16) > x) {
-            if (birdX < (x + 16)) {
+        if ((birdX + 32) > x) {
+            if (birdX < (x + 32)) {
                 if (birdY < gapTop) {
                     return true;
                 }
