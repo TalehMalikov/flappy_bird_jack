@@ -57,5 +57,11 @@ class Bird{
     method void dispose() {
       do Memory.deAlloc(this);
       return;
-   }
+    }
+
+   method void erase() {
+        do Screen.setColor(false);
+        do Screen.drawRectangle(x, y, x + 16, y + 16);
+        return;
+    }
 }

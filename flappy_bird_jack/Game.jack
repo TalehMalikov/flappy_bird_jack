@@ -9,7 +9,7 @@ class Game{
         let pipe = Pipe.new(256, 100, 50);
         let isGameOver = false;
         let score = 0;
-        do Random.setSeed(Sys.time());
+        do Random.setSeed(12345);
         return this;
     }
 
@@ -36,24 +36,28 @@ class Game{
 
     method void run() {
         var char key;
-
+    
         while (~checkGameOver()) {
             let key = Keyboard.keyPressed();
-
-            if (key = 32) {  // 32 is the spacebar character
+            if (key = 32) {
                 do bird.flap();
             }
-
+    
+            do bird.erase();
+            do pipe.erase();
+    
             do bird.move();
             do pipe.move();
+    
             if (pipe.isOffScreen()) {
                 do pipe.dispose();
                 let pipe = Pipe.new(256, Random.randRange(30, 150), 80);
                 let score = score + 1;
             }
-            do Screen.clear();
+    
             do bird.draw();
             do pipe.draw();
+    
             do Output.moveCursor(0, 0);
             do Output.printInt(score);
             do Sys.wait(50);
