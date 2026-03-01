@@ -1,0 +1,20 @@
+class Random {
+    static int seed;
+
+    function void setSeed(int s) {
+        let seed = s;
+        return;
+    }
+
+    function int rand() {
+        let seed = (seed * 214013) + 2531011;
+        if (seed < 0) { let seed = -seed; }
+        return seed;
+    }
+
+    function int randRange(int min, int max) {
+        var int range;
+        let range = max - min;
+        return min + (Random.rand() - ((Random.rand() / range) * range));
+    }
+}

@@ -55,10 +55,8 @@ class Bird{
         return x;
     }
 
-    /** Disposes this square. */
     method void dispose() {
       do Memory.deAlloc(this);
       return;
    }
-
 }

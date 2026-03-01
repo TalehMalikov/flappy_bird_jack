@@ -1,0 +1,72 @@
+class Game{
+    field Bird bird;
+    field Pipe pipe;
+    field boolean isGameOver;
+    field int score;
+
+    constructor Game new() {
+        let bird = Bird.new(64, 128);
+        let pipe = Pipe.new(256, 100, 50);
+        let isGameOver = false;
+        let score = 0;
+        do Random.setSeed(Sys.time());
+        return this;
+    }
+
+    method boolean checkGameOver() {
+        if (isGameOver) {
+            return true;
+        }
+        if (bird.getY() < 0) {
+            let isGameOver = true;
+            return true;
+        }
+
+        if (bird.getY() > 240) {
+            let isGameOver = true;
+            return true;
+        }
+
+        if (pipe.collidesWith(bird)) {
+            let isGameOver = true;
+            return true;
+        }
+        return false;
+    }
+
+    method void run() {
+        var char key;
+
+        while (!checkGameOver()) {
+            let key = Keyboard.keyPressed();
+
+            if (key = 32) {  // 32 is the spacebar character
+                do bird.flap();
+            }
+
+            do bird.move();
+            do pipe.move();
+            if (pipe.isOffScreen()) {
+                do pipe.dispose();
+                let pipe = Pipe.new(256, Random.randRange(30, 150), 80);
+                let score = score + 1;
+            }
+            do Screen.clear();
+            do bird.draw();
+            do pipe.draw();
+            do Output.moveCursor(0, 0);
+            do Output.printInt(score);
+            do Sys.wait(50);
+        }
+        do Output.moveCursor(10, 20);
+        do Output.printString("Game Over! Score: ");
+        do Output.printInt(score);
+        return;
+    }
+
+    method void dispose() {
+        do bird.dispose();
+        do pipe.dispose();
+        return;
+    }
+}
