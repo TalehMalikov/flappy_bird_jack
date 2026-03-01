@@ -17,15 +17,16 @@ class Bird{
     method void move() {
         let velocity = velocity + 1;
         let y = y + velocity;
-        if (y < 0)   { let y = 0; }
-        if (y > 220) { let y = 220; }
+        //if (y > 220) { let y = 220; }
         return;
     }
 
     method void draw() {
         var int location;
         var int memAddress;
-        if ((y < 0) | (y > 220)) { return; }
+
+        if ((y < 1) | (y > 220)) { return; }
+
         let location = (y * 32) + (x / 16);
         let memAddress = 16384 + location;
         do Memory.poke(memAddress + 0, 0);

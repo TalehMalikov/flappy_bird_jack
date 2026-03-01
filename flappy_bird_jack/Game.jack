@@ -62,10 +62,23 @@ class Game{
             do Sys.wait(30);
         }
 
-        do Screen.clearScreen();
         do Output.moveCursor(10, 20);
         do Output.printString("Game Over! Score: ");
         do Output.printInt(score);
+        do Output.moveCursor(12, 20);
+        do Output.printString("Press Space to restart");
+
+        while (~(Keyboard.keyPressed() = 32)) {}
+
+        do bird.dispose();
+        do pipe.dispose();
+        let bird = Bird.new(32, 128);
+        let pipe = Pipe.new(400, 80, 150);
+        let score = 0;
+        let isGameOver = false;
+        do Screen.setColor(false);
+        do Screen.drawRectangle(0, 0, 511, 255);
+        do run();
         return;
     }
 
