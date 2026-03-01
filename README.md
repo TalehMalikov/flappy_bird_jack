@@ -11,9 +11,9 @@ A Flappy Bird clone implemented in the Jack programming language for the Nand2Te
 ## How to Play
 
 ### Setup
-1. Compile the project using the **JackCompiler**:
+1. Compile the project using the **JackCompiler** inside tools folder of nand2tetris:
    ```
-   JackCompiler.bat path\to\flappy_bird_jack
+   .\JackCompiler.bat path\to\flappy_bird_jack
    ```
 2. Open the **VMEmulator** from the Nand2Tetris tools folder
 3. Load the `flappy_bird_jack` folder
