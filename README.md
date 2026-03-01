@@ -1,6 +1,5 @@
 # Flappy Bird - Jack Language
 ### Nand2Tetris Project 9
-**Student:** Taleh Malikov
 
 ---
 
